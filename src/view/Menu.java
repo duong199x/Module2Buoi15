@@ -1,5 +1,6 @@
 package view;
 
+import dto.ReadAndWriteEmployee;
 import manager.EmployeeManager;
 import manager.ExperienceManager;
 import manager.FresherManager;
@@ -23,6 +24,7 @@ public class Menu {
     ExperienceManager listExperience = new ExperienceManager();
     FresherManager listFresher = new FresherManager();
     InternManager listIntern = new InternManager();
+    Employee employee = new Employee();
 
     public void MainMenu() {
         int choice;
@@ -154,7 +156,7 @@ public class Menu {
         int phoneNumber = inputInt.nextInt();
         System.out.println("Nhập email:");
         String email = inputString.nextLine();
-        Employee newEmployee = new Employee(name, dateBirth, phoneNumber, email, employeeEdit.getEmployee_type(), employeeEdit.getCertificate_type());
+        Employee newEmployee = new Employee(idEdit, name, dateBirth, phoneNumber, email, employeeEdit.getEmployee_type(), employeeEdit.getCertificate_type());
         listEmployee.editEmployee(idEdit, newEmployee);
     }
 
@@ -257,7 +259,7 @@ public class Menu {
     }
 
     public void showAddCertificateEmployee() {
-        showAll();
+        this.showAll();
         System.out.println("Nhập id nhân viên muốn thêm:");
         int idAdd = inputInt.nextInt();
         Employee findEmployee = listEmployee.findEmployee(idAdd);
@@ -273,6 +275,7 @@ public class Menu {
         List<Certificate> listCertificate = findEmployee.getCertificate_type();
         listCertificate.add(newCertificate);
         findEmployee.setCertificate_type(listCertificate);
+        listEmployee.saveFile();
     }
 
     public void showCertificateEmployee() {

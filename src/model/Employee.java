@@ -12,30 +12,32 @@ public class Employee {
     private int Phone;
     private String Email;
     private int Employee_type;
-    private static int Employee_count = 0;
+    private static int Employee_count = 1;
     private List<Certificate> certificate_type = new ArrayList<>();
 
     public Employee(String fullName, Date birthDay, int phone, String email, int employee_type, List<Certificate> certificate_type) {
-        this.ID = ++Employee_count;
+        this.ID = Employee_count;
         this.FullName = fullName;
         this.BirthDay = birthDay;
         this.Phone = phone;
         this.Email = email;
         this.Employee_type = employee_type;
         this.certificate_type = certificate_type;
+        Employee_count++;
     }
 
     public Employee(String fullName, Date birthDay, int phone, String email, int employee_type) {
-        this.ID = ++Employee_count;
+        this.ID = Employee_count;
         this.FullName = fullName;
         this.BirthDay = birthDay;
         this.Phone = phone;
         this.Email = email;
         this.Employee_type = employee_type;
+        Employee_count++;
     }
 
-    public Employee(int id,String fullName, Date birthDay, int phone, String email, int employee_type, List<Certificate> certificate_type) {
-        this.ID = ++Employee_count;
+    public Employee(int id, String fullName, Date birthDay, int phone, String email, int employee_type, List<Certificate> certificate_type) {
+        this.ID = id;
         this.FullName = fullName;
         this.BirthDay = birthDay;
         this.Phone = phone;
@@ -112,6 +114,10 @@ public class Employee {
             return "Intern";
         }
         return null;
+    }
+
+    public int getSizecertificate_type() {
+        return certificate_type.size();
     }
 
     @Override

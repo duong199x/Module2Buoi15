@@ -11,7 +11,11 @@ public class EmployeeManager implements IEmployee<Employee> {
 
     public EmployeeManager() {
         readAndWriteEmployee = new ReadAndWriteEmployee();
-        listEmployee = new ArrayList<>();
+        if (readAndWriteEmployee.readFile() != null) {
+            listEmployee = readAndWriteEmployee.readFile();
+        } else {
+            listEmployee = new ArrayList<>();
+        }
 
     }
 
@@ -21,16 +25,22 @@ public class EmployeeManager implements IEmployee<Employee> {
         readAndWriteEmployee.writeFile(listEmployee);
     }
 
+    public void saveFile() {
+        readAndWriteEmployee.writeFile(listEmployee);
+    }
+
     @Override
     public void deleteEmployee(int id) {
         int index = findIndexById(id);
         listEmployee.remove(index);
+        readAndWriteEmployee.writeFile(listEmployee);
     }
 
     @Override
     public void editEmployee(int id, Employee employee) {
         int index = findIndexById(id);
         listEmployee.set(index, employee);
+        readAndWriteEmployee.writeFile(listEmployee);
     }
 
     @Override
@@ -53,6 +63,7 @@ public class EmployeeManager implements IEmployee<Employee> {
     }
 
     public ArrayList<Employee> showEmployee() {
+        readAndWriteEmployee.readFile();
         return this.listEmployee;
     }
 
